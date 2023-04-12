@@ -16,13 +16,12 @@ namespace PersonasWeb.Controllers
             return "Pantalla para crear personas";
         }
 
-        // URL: /Persona/ConsultarPersona?parametro=
-        public string ConsultarPersona(string parametro)
+        // Recibe dos parametros nombre y apellido
+        // Retorna un texto "Nombre: Emiliano, Apellido: Buffet"
+        // URL: /Persona/ConsultarPersona?nombre=Emiliano&apellido=Buffet
+        public string ConsultarPersona(string nombre, string apellido)
         {
-            return HtmlEncoder.Default.Encode($"{parametro}");
+            return HtmlEncoder.Default.Encode($"Nombre: {nombre}, Apellido: {apellido}");
         }
-
-        //Modificar el metodo ConsultarPersona para que reciba dos parametros: nombre y apellido
-        //Y luego mostrar "Nombre: Emiliano, Apellido: Buffet"
     }
 }
