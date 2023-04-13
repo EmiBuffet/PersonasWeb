@@ -16,9 +16,8 @@ namespace PersonasWeb.Controllers
             return View();
         }
 
-        // Ejercicio: Crear vista para constar personas, sin parametros
-        // Debe mostrar un h2 con el texto "Pantalla para consultar Persona"
-        // La misma se debe acceder desde una opcion en el menú
+        // URL: /Persona/ConsultarPersona?nombre=Emiliano
+        // Pasamos del controlador a la vista el parametro nombre
         public IActionResult ConsultarPersona(string nombre)
         {
             ViewData["nombre"] = nombre;
