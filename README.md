@@ -50,8 +50,19 @@ Documentacion: https://learn.microsoft.com/es-es/aspnet/core/tutorials/first-mvc
             }
             return View(persona);
         }
-7 En archivo .csthml
-  @model Persona.Models.Persona
-  <form asp-action="CrearPersona" method="POST">
-  <input asp-for="nombre">
-  <label asp-for="nombre">
+7 En archivo .csthml  
+	@model PersonasWeb.Models.Persona
+	@{
+    	ViewData["Title"] = "Crear Personas";
+	}
+	
+	<div class="container-lg col-4">
+    	<h1>Registrar Persona</h1>
+    	<form asp-action="CrearPersona" method="POST">
+	<div class="input-group mb-3">
+            	<label asp-for="Nombre" class="input-group-text">Nombre</label>
+            	<input asp-for="Nombre" type="text" class="form-control" placeholder="Ingresar Nombre" id="nombre">
+        </div>
+        	<button type="submit" class="btn btn-primary">Guardar</button>
+    	</form>
+	</div>
