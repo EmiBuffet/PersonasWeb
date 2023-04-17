@@ -50,7 +50,8 @@ Documentacion: https://learn.microsoft.com/es-es/aspnet/core/tutorials/first-mvc
             }
             return View(persona);
         }
-7 En archivo .csthml  
+7 En archivo .csthml
+
 	@model PersonasWeb.Models.Persona
 	@{
     	ViewData["Title"] = "Crear Personas";
