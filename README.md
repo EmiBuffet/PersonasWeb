@@ -3,10 +3,11 @@ Pasos para usar EntityFramework
 
 Documentacion: https://learn.microsoft.com/es-es/aspnet/core/tutorials/first-mvc-app/adding-model?view=aspnetcore-6.0&tabs=visual-studio
 
-1 Agregar paquete Nuget
-	- Microsoft.EntityFrameworkCore.SqlServer
-	- Microsoft.EntityFrameworkCore.Tools
-2 Agregar carpeta Data, crear clase ApplicationDbContext que herede de DbContext.
+1 Agregar paquete Nuget  
+	- Microsoft.EntityFrameworkCore.SqlServer  
+	- Microsoft.EntityFrameworkCore.Tools  
+	
+2 Agregar carpeta Data, crear clase ApplicationDbContext que herede de DbContext.  
     public class PersonasWebContext : DbContext
     {
         public PersonasWebContext (DbContextOptions<PersonasWebContext> options): base(options)
@@ -16,11 +17,11 @@ Documentacion: https://learn.microsoft.com/es-es/aspnet/core/tutorials/first-mvc
         public DbSet<PersonasWeb.Models.Persona> Persona { get; set; } = default!;
     }  
     
-3 En clase program.cs, agregar las siguientes lineas:
+3 En clase program.cs, agregar las siguientes lineas:  
   builder.Services.AddDbContext<PersonasContext>(options =>
       options.UseSqlServer(builder.Configuration.GetConnectionString("PersonasContext") ?? throw new InvalidOperationException("Connection string 'PersonasWebContext' not found.")));  
       
-4 En el archivo appsetting.json, agregar la conexion a la base de datos
+4 En el archivo appsetting.json, agregar la conexion a la base de datos  
   "ConnectionStrings": {
     "PersonasWebContext": "Server=(localdb)\\mssqllocaldb;Database=Personas;Trusted_Connection=True;MultipleActiveResultSets=true"
   }  
