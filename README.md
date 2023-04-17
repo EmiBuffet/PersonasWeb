@@ -14,15 +14,19 @@ Documentacion: https://learn.microsoft.com/es-es/aspnet/core/tutorials/first-mvc
         }
 
         public DbSet<PersonasWeb.Models.Persona> Persona { get; set; } = default!;
-    }
+    }  
+    
 3 En clase program.cs, agregar las siguientes lineas:
   builder.Services.AddDbContext<PersonasContext>(options =>
-      options.UseSqlServer(builder.Configuration.GetConnectionString("PersonasContext") ?? throw new InvalidOperationException("Connection string 'PersonasWebContext' not found.")));
+      options.UseSqlServer(builder.Configuration.GetConnectionString("PersonasContext") ?? throw new InvalidOperationException("Connection string 'PersonasWebContext' not found.")));  
+      
 4 En el archivo appsetting.json, agregar la conexion a la base de datos
   "ConnectionStrings": {
     "PersonasWebContext": "Server=(localdb)\\mssqllocaldb;Database=Personas;Trusted_Connection=True;MultipleActiveResultSets=true"
-  }
-5 Ejercutar : Add-Migration InitialCreate y Update-Database
+  }  
+  
+5 Ejercutar : Add-Migration InitialCreate y Update-Database  
+
 6 En el controlador creado agregar
         private readonly PersonasContext _context;
 
