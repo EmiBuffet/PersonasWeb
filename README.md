@@ -18,26 +18,25 @@ Documentacion: https://learn.microsoft.com/es-es/aspnet/core/tutorials/first-mvc
     }  
     
 3 En clase program.cs, agregar las siguientes lineas:  
-  builder.Services.AddDbContext<PersonasContext>(options =>
-      options.UseSqlServer(builder.Configuration.GetConnectionString("PersonasContext") ?? throw new InvalidOperationException("Connection string 'PersonasWebContext' not found.")));  
+builder.Services.AddDbContext<PersonasWebContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("PersonasWebContext")));
       
 4 En el archivo appsetting.json, agregar la conexion a la base de datos  
-  "ConnectionStrings": {
-    "PersonasWebContext": "Server=(localdb)\\mssqllocaldb;Database=Personas;Trusted_Connection=True;MultipleActiveResultSets=true"
-  }  
+"ConnectionStrings": 
+	{ "PersonasWebContext": "Server=localhost\\SQLEXPRESS;Database=Personas;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=True;" }
   
 5 Ejercutar : Add-Migration InitialCreate y Update-Database  
 
 6 En el controlador creado agregar
-        private readonly PersonasContext _context;
+        private readonly PersonasWebContext _context;
 
-        public PersonasController(PersonasWebContext context)
+        public PersonaController(PersonasWebContext context)
         {
             _context = context;
         }
         //Metodo post
         [HttpPost]
-        public async Task<IActionResult> CrearPersona([Bind("Id,nombre,apellido")] Persona persona)
+       public async Task<IActionResult> CrearPersona(Persona persona)
         {
             if (ModelState.IsValid)
             {
