@@ -7,28 +7,32 @@ Documentacion: https://learn.microsoft.com/es-es/aspnet/core/tutorials/first-mvc
 	- Microsoft.EntityFrameworkCore.SqlServer  
 	- Microsoft.EntityFrameworkCore.Tools  
 	
-2 Agregar carpeta Data, crear clase ApplicationDbContext que herede de DbContext.  
-    public class PersonasWebContext : DbContext
-    {
-        public PersonasWebContext (DbContextOptions<PersonasWebContext> options): base(options)
-        {
-        }
+2 Agregar carpeta Data, crear clase ApplicationDbContext que herede de DbContext.
 
-        public DbSet<PersonasWeb.Models.Persona> Persona { get; set; } = default!;
-    }  
+	public class PersonasWebContext : DbContext
+	{
+		public PersonasWebContext (DbContextOptions<PersonasWebContext> options): base(options)
+		{
+		}
+
+		public DbSet<PersonasWeb.Models.Persona> Persona { get; set; } = default!;
+    	}  
     
-3 En clase program.cs, agregar las siguientes lineas:  
-builder.Services.AddDbContext<PersonasWebContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("PersonasWebContext")));
+3 En clase program.cs, agregar las siguientes lineas:
+
+	builder.Services.AddDbContext<PersonasWebContext>(options =>
+	options.UseSqlServer(builder.Configuration.GetConnectionString("PersonasWebContext")));
       
-4 En el archivo appsetting.json, agregar la conexion a la base de datos  
-"ConnectionStrings": 
-	{ "PersonasWebContext": "Server=localhost\\SQLEXPRESS;Database=Personas;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;TrustServerCertificate=True;" }
+4 En el archivo appsetting.json, agregar la conexion a la base de datos
+
+	"ConnectionStrings": 
+	{ "PersonasWebContext": "Server=localhost\\SQLEXPRESS;Database=Personas;Trusted_Connection=True;MultipleActiveResultSets=true;IntegratedSecurity=True;TrustServerCertificate=True;" }
   
 5 Ejercutar : Add-Migration InitialCreate y Update-Database  
 
 6 En el controlador creado agregar
-        private readonly PersonasWebContext _context;
+
+	private readonly PersonasWebContext _context;
 
         public PersonaController(PersonasWebContext context)
         {
