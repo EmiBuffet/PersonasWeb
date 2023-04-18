@@ -1,10 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PersonasWeb.Models;
 using System.Text.Encodings.Web;
 
 namespace PersonasWeb.Controllers
 {
     public class PersonaController : Controller
     {
+        private readonly PersonasWebContext _context;
+        public PersonaController(PersonasWebContext context)
+        {
+            _context = context;
+        }
         // URL: /Persona
         public string Index()
         {
@@ -14,6 +20,18 @@ namespace PersonasWeb.Controllers
         public IActionResult CrearPersona()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CrearPersona(Persona persona)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(persona);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(persona);
         }
 
         // URL: /Persona/ConsultarPersona?nombre=Emiliano

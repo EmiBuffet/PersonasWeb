@@ -1,5 +1,15 @@
-﻿@{
+﻿@model PersonasWeb.Models.Persona
+@{
     ViewData["Title"] = "Crear Personas";
 }
 
-<h1>Pantalla para crear Personas</h1>
+<div class="container-lg col-4">
+    <h1>Registrar Persona</h1>
+    <form asp-action="CrearPersona" method="POST">
+        <div class="input-group mb-3">
+            <label asp-for="Nombre" class="input-group-text">Nombre</label>
+            <input asp-for="Nombre" type="text" class="form-control" placeholder="Ingresar Nombre" id="nombre">
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>

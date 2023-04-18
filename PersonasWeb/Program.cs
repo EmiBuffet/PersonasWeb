@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<PersonasWebContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("PersonasWebContext")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
