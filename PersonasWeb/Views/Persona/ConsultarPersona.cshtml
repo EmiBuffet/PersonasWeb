@@ -1,6 +1,11 @@
-﻿@{
-    ViewData["Title"] = "Consultar Personas";
+﻿@model PersonasWeb.Models.Persona
+@{
+    ViewData["Title"] = "Consultar Persona";
 }
 
 <h1>Pantalla para consultar Personas</h1>
-<p>Nombre: @ViewData["nombre"]</p>
+<p>Nombre: @Html.DisplayFor(m => m.Nombre)</p>
+<p>Apellido: @Html.DisplayFor(m => m.Apellido)</p>
+<p>Fecha Nacimiento: @Html.DisplayFor(m => m.FechaNacimiento)</p>
+<p>Sexo: @Html.DisplayFor(m => m.Sexo)</p>
+<p>Ciudad: @Html.DisplayFor(m => m.Ciudad)</p>

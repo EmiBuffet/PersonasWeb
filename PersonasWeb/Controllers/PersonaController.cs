@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PersonasWeb.Models;
 using System.Text.Encodings.Web;
 
@@ -12,10 +13,31 @@ namespace PersonasWeb.Controllers
             _context = context;
         }
         // URL: /Persona
-        public string Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return "Crear Persona";
+            return View(await _context.Persona.ToListAsync());
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ConsultarPersona(int? id)
+        {
+            if (id == null || _context.Persona == null)
+            {
+                return NotFound();
+            }
+
+            var persona = await _context.Persona
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (persona == null)
+            {
+                return NotFound();
+            }
+
+            return View(persona);
+        }
+
+
         // URL: /Persona/CrearPersona
         public IActionResult CrearPersona()
         {
