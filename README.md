@@ -67,3 +67,63 @@ Documentacion: https://learn.microsoft.com/es-es/aspnet/core/tutorials/first-mvc
         	<button type="submit" class="btn btn-primary">Guardar</button>
     	</form>
 	</div>
+
+8 Metodos para consultar todos las Personas y para consultar una sola persona por ID
+        
+	[HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Persona.ToListAsync());
+        }
+	
+	[HttpGet]
+        public async Task<IActionResult> ConsultarPersona(int? id)
+        {
+            if (id == null || _context.Persona == null)
+            {
+                return NotFound();
+            }
+
+            var persona = await _context.Persona
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (persona == null)
+            {
+                return NotFound();
+            }
+
+            return View(persona);
+        }
+
+9 En vista, para mostrar detalle de una persona:
+		@Html.DisplayFor(m => m.nombre)
+Para mostrar varias personas, agregar @model IEnumerable<PersonasWeb.Models.Persona>
+
+	<div class="container-lg col-4">
+    	@if (Model.Count() > 0)
+    	{
+       	 <table class="table table-bordered" id="" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.Id)</th>
+                    <th>@Html.DisplayNameFor(m => m.nombre)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    	<tr>
+                        	<td>@Html.DisplayFor(m => item.Id)</td>
+                        	<td>@Html.DisplayFor(m => item.nombre)</td>
+                        	<td>
+                            	<a class="btn btn-secondary" asp-action="ConsultarPersona" asp-route-id="@item.Id"><i class="bi bi-info-circle-fill"></i>Detalle</a>
+                        	</td>
+                    	</tr>
+                }
+            </tbody>
+        </table>
+    	}
+    	else
+   	 {
+        	<p>No hay registros</p>
+   	 }
+	</div>
