@@ -26,7 +26,7 @@ Documentacion: https://learn.microsoft.com/es-es/aspnet/core/tutorials/first-mvc
 4 En el archivo appsetting.json, agregar la conexion a la base de datos
 
 	"ConnectionStrings": 
-	{ "PersonasWebContext": "Server=localhost\\SQLEXPRESS;Database=Personas;Trusted_Connection=True;MultipleActiveResultSets=true;IntegratedSecurity=True;TrustServerCertificate=True;" }
+	{ "PersonasWebContext": "Server=localhost\\SQLEXPRESS;Database=Personas;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;" }
   
 5 Ejercutar : Add-Migration InitialCreate y Update-Database  
 
