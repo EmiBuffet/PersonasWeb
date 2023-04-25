@@ -30,11 +30,15 @@
         }
         <!-- Ciudad -->
         <div class="form-group mb-3 mt-3">
-            <label asp-for="Ciudad" class="form-label"></label>
-            <select asp-for="Ciudad" asp-items="Html.GetEnumSelectList<Ciudad>()" class="form-select">
-                <option selected="selected" value="">Ciudad</option>
-            </select>
-            <span asp-validation-for="Ciudad" class="text-danger" />
+            <div class="mb-3 mt-3">
+
+                @Html.DropDownListFor(m => m.CiudadId,
+
+                new SelectList((System.Collections.IEnumerable)ViewData["Ciudades"], "Id", "Nombre"),
+
+                new { @class = "form-select" })
+
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
     </form>

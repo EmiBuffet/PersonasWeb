@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PersonasWeb.Migrations
 {
     [DbContext(typeof(PersonasWebContext))]
-    [Migration("20230419003545_AgregarCampos")]
-    partial class AgregarCampos
+    [Migration("20230420223952_AgregarCiudad2")]
+    partial class AgregarCiudad2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,22 @@ namespace PersonasWeb.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("PersonasWeb.Models.Ciudad", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Ciudad");
+                });
 
             modelBuilder.Entity("PersonasWeb.Models.Persona", b =>
                 {
@@ -35,7 +51,7 @@ namespace PersonasWeb.Migrations
                     b.Property<string>("Apellido")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Ciudad")
+                    b.Property<int>("CiudadId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("FechaNacimiento")
@@ -49,7 +65,25 @@ namespace PersonasWeb.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CiudadId");
+
                     b.ToTable("Persona");
+                });
+
+            modelBuilder.Entity("PersonasWeb.Models.Persona", b =>
+                {
+                    b.HasOne("PersonasWeb.Models.Ciudad", "Ciudad")
+                        .WithMany("Personas")
+                        .HasForeignKey("CiudadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ciudad");
+                });
+
+            modelBuilder.Entity("PersonasWeb.Models.Ciudad", b =>
+                {
+                    b.Navigation("Personas");
                 });
 #pragma warning restore 612, 618
         }

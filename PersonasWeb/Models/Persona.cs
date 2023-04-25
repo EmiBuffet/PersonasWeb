@@ -18,8 +18,8 @@ namespace PersonasWeb.Models
         [DataType(DataType.Date)]
         public DateTime FechaNacimiento { get; set; }
 
-        [EnumDataType(typeof(Ciudad))]
-        public Ciudad Ciudad { get; set; }
+        public int CiudadId { get; set; }
+        public Ciudad? Ciudad { get; set; }
     }
 
     public enum Sexo
@@ -29,10 +29,4 @@ namespace PersonasWeb.Models
         Otro = 3
     }
 
-    public enum Ciudad
-    {
-        Sunchales = 1,
-        Ataliva = 2,
-        Rafaela = 3
-    }
 }

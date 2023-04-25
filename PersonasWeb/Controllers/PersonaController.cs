@@ -27,7 +27,7 @@ namespace PersonasWeb.Controllers
                 return NotFound();
             }
 
-            var persona = await _context.Persona
+            var persona = await _context.Persona.Include(p => p.Ciudad)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (persona == null)
             {
@@ -39,8 +39,9 @@ namespace PersonasWeb.Controllers
 
 
         // URL: /Persona/CrearPersona
-        public IActionResult CrearPersona()
+        public async Task<IActionResult> CrearPersonaAsync()
         {
+            ViewData["Ciudades"] = await _context.Ciudad.ToListAsync();
             return View();
         }
 
@@ -61,6 +62,7 @@ namespace PersonasWeb.Controllers
         public IActionResult ConsultarPersona(string nombre)
         {
             ViewData["nombre"] = nombre;
+
             return View();
         }
 
